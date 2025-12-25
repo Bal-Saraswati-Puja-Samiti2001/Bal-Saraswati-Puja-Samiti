@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>श्री श्री 108 बाल सरस्वती पूजा समिति</title>
+
+
+<style>
+body{
+  margin:0;
+  font-family:"Segoe UI", Arial;
+  background:linear-gradient(135deg,#fdfbfb,#ebedee);
+}
+
+/* ================= HEADER MARQUEE ================= */
+.header-wrap{
+  background:linear-gradient(135deg,#6a11cb,#2575fc);
+  overflow:hidden;
+  padding:16px 0;
+}
+.marquee{
+  overflow:hidden;
+}
+.marquee-content{
+  display:flex;
+  width:200%;
+  animation:scrollLeft 22s linear infinite;
+}
+.marquee-item{
+  width:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:22px;
+  color:#fff;
+  text-align:center;
+}
+.title h1{margin:0;font-size:22px;}
+.title p{margin:4px 0 0;font-size:14px;}
+
+@keyframes scrollLeft{
+  0%{transform:translateX(0);}
+  100%{transform:translateX(-50%);}
+}
+
+/* ================= SILVER JUBILEE ================= */
+.jubilee{
+  background:linear-gradient(135deg,#ffd700,#fff3a0);
+  color:#000;
+  padding:8px 18px;
+  border-radius:16px;
+  font-weight:bold;
+  visibility:hidden;
+}
+.jubilee.show{
+  visibility:visible;
+  animation:blink 1.4s infinite, glow 2s infinite;
+}
+
+@keyframes blink{
+  0%,100%{opacity:1;}
+  50%{opacity:.6;}
+}
+@keyframes glow{
+  0%{box-shadow:0 0 10px gold;}
+  50%{box-shadow:0 0 28px gold;}
+  100%{box-shadow:0 0 10px gold;}
+}
+
+/* ================= CONFETTI ================= */
+.confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:999;
+  transition: opacity 1s ease;
+}
+.confetti span{
+  position:absolute;
+  width:10px;
+  height:14px;
+  opacity:.9;
+  animation:fall 3s linear infinite;
+}
+@keyframes fall{
+  0%{transform:translateY(-10vh) rotate(0deg);}
+  100%{transform:translateY(110vh) rotate(360deg);}
+}
+
+/* ================= CONTENT ================= */
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:15px;
+}
+.card{
+  background:#fff;
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:15px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.08);
+}
+.card h2{
+  margin:0 0 10px;
+  font-size:18px;
+  border-bottom:2px solid #eee;
+}
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:7px 0;
+  border-bottom:1px dashed #ddd;
+}
+.bold{font-weight:bold;}
+
+.summary{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.box{
+  flex:1;
+  min-width:120px;
+  text-align:center;
+  color:#fff;
+  border-radius:12px;
+  padding:15px;
+  font-weight:bold;
+}
+.green{background:#2e8b57;}
+.red{background:#c0392b;}
+.blue{background:#2980b9;}
+
+select{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  font-size:16px;
+}
+
+/* ================= PHOTO GRID ================= */
+.photo-grid{
+  display:flex;
+  gap:12px;
+  overflow-x:auto;
+  scroll-behavior:auto;
+}
+.photo-grid::-webkit-scrollbar{
+  display:-webkit-inline-box;
+}
+.photo-grid img{
+  min-width:140px;
+  height:140px;
+  border-radius:12px;
+  object-fit:cover;
+  cursor:pointer;
+}
+
+/* ================= LIGHTBOX ================= */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:2000;
+}
+.lightbox img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:12px;
+}
+.lightbox span{
+  position:absolute;
+  top:20px;
+  right:25px;
+  font-size:30px;
+  color:#fff;
+  cursor:pointer;
+}
+
+/* ================= FIREWORKS ================= */
+.fireworks{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1000;
+  transition:opacity 1s ease;
+}
+.spark{
+  position:absolute;
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  opacity:1;
+  animation: explode 1.2s ease-out forwards;
+}
+@keyframes explode{
+  from{
+    transform:translate(0,0) scale(1);
+    opacity:1;
+  }
+  to{
+    transform:translate(var(--x), var(--y)) scale(0.2);
+    opacity:0;
+  }
+}
+
+/* ================= GUEST CONTAINER ================= */
+/* ================= GUEST CONTAINER ================= */
+.guest-container {
+  position: absolute; /* moves with page scroll */
+  top: 150px;
+  right: 20px;
+  width: 200px;       /* adjust width as needed */
+  background: rgba(255, 71, 87, 0.9);
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  z-index: 1500;
+  display: none;      /* hidden initially */
+  
+}
+
+.guest-container img {
+  width: 100%;
+  height: auto;       /* keep image proportional */
+  aspect-ratio: 3/4;  /* taller image, adjust as needed */
+  border-radius: 8px;
+  object-fit: cover;  /* fills container without distortion */
+}
+
+.guest-container p {
+  color: #fff;
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+@keyframes blink {
+  0%,100% {opacity: 1;}
+  50% {opacity: 0.5;}
+}
+/* ================= MOBILE FRIENDLY ================= */
+@media (max-width: 600px){
+
+  .container{
+    padding:10px;
+  }
+
+  .marquee-item{
+    flex-direction:column;
+    gap:10px;
+  }
+
+  .title h1{
+    font-size:18px;
+  }
+
+  .title p{
+    font-size:13px;
+  }
+
+  .jubilee{
+    font-size:14px;
+    padding:6px 14px;
+  }
+
+  .summary{
+    flex-direction:column;
+  }
+
+  .box{
+    width:100%;
+  }
+
+  .photo-grid img{
+    min-width:120px;
+    height:120px;
+  }
+
+  /* Guest box mobile fix */
+  .guest-container{
+    position:relative;
+    top:auto;
+    right:auto;
+    width:100%;
+    margin-bottom:15px;
+  }
+}
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px) {
+  .guest-container {
+    position: static;        /* content के साथ flow करेगा */
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .guest-container img {
+    max-height: 260px;
+    object-fit: cover;
+  }
+}
+
+
+
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<div class="header-wrap">
+  <div class="marquee">
+    <div class="marquee-content">
+      <div class="marquee-item">
+        <div class="title">
+          <h1>श्री श्री 108 बाल सरस्वती पूजा समिति</h1>
+          <p>बेलाम, नीमा, शिवदत्तपुर</p>
+        </div>
+        <div class="jubilee">🎉 रजत जयंती 2025</div>
+      </div>
+      <div class="marquee-item">
+        <div class="title">
+          <h1>श्री श्री 108 बाल सरस्वती पूजा समिति</h1>
+          <p>बेलाम, नीमा, शिवदत्तपुर</p>
+        </div>
+        <div class="jubilee">🎉 रजत जयंती 2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+
+  <div class="card">
+    <select id="yearSelect" onchange="loadYear()">
+      <option value="">📅 वर्ष चुनें</option>
+      <option value="2024">2024</option>
+      <option value="2025">2025</option>
+      <option value="2026">2026</option>
+    </select>
+  </div>
+
+  <!-- Guest container -->
+  <div id="guestContainer" class="guest-container" style="display:none">
+    <img id="guestImage" src="" alt="मुख्य अतिथि">
+    <p id="guestCaption"></p>
+  </div>
+
+  <div id="members" class="card"></div>
+  <div id="collection" class="card"></div>
+  <div id="expense" class="card"></div>
+  <div id="photos" class="card" style="display:none">
+    <h2>📸 वर्ष की झलकियाँ</h2>
+    <div class="photo-grid"></div>
+  </div>
+  <div id="summary"></div>
+</div>
+
+<script>
+const data = {
+ "2025": {
+  members:["अध्यक्ष: दिनेश साह","कोषाध्यक्ष: रौशन कुमार साह","सचिव: रंधीर कुमार साह"],
+  ///collection:{"साह टोला":25000,"ब्राह्मण टोला":25000,"सहनी टोला":25000,"यादव टोला":441},
+  ///kamiti:107683,lucky_draw:6400,kalash:11800,mahaprashad:4453,
+
+  rural_total: 75441,   // ✅ सही verified कुल
+
+  collection: {},       // 🚫 tola-wise अभी blank
+
+  kamiti:107683,
+  lucky_draw:6400,
+  kalash:11800,
+  mahaprashad:4453,
+
+  expense:{"मूर्ति":10610,"टेंट":71500,"फूल":21000,"सेट्रींग":3300,"पाग + डोपता + रिबन":650,"पित्तल घड़ा + अबीर + चूना":5450,"गेंदा फूल + माला":660,"डीजल":1815,"मिट्टी कलश":2100,"संकल्प हेतु":1374,"दक्षिणा":4100,"खाना + नाश्ता(टेंट + थाना स्टाफ)":1520,"फल":670,"कॉपी + पेन":895,"बैनर + कार्ड":1250,"जंगली बादशाह":22000,"महाकाल जागरण":23500,"पेट्रोल(कार्यक्रम हेतु)":160,"फटाका":1000,"सांस्कृतिक कार्यक्रम":10500,"महाप्रसाद मे":420,"भाड़ा(भासान हेतु)":500,"किराना":8000,"लाल कपड़ा + धोती ":2900,"भगवान पूजा हेतु":1832,"नारियल + पूजा सामग्री":4200,"अन्य खर्च":3441}
+ },
+ "2026": {
+  members:["अध्यक्ष: दिलीप साहू", "कोषाध्यक्ष: सुरेन्द्र कुमार साह", "सचिव: रंधीर कुमार साह"],
+ }
+};
+
+const yearPhotos = {
+ "2025":["2025/img1.jpg","2025/img2.jpg","2025/img3.jpg","2025/img4.jpg","2025/img5.jpg","2025/img6.jpeg","2025/img7.jpeg","2025/img8.jpeg"],
+ "2024":["2024/img1.jpg","2024/img2.jpg"]
+};
+
+const chiefGuest = {
+ //"2024": {name:"डा. रामेश्वर साह", img:"2024/guest.jpg"},
+ "2025": {name:"तत्कालीन थानाध्यक्ष(सकरी थाना) ", img:"2025/guest.jpg"}
+};
+
+function loadYear(){
+  
+ const year = yearSelect.value;
+ 
+
+ const guestContainer = document.getElementById("guestContainer");
+ const guestImage = document.getElementById("guestImage");
+ const guestCaption = document.getElementById("guestCaption");
+ 
+
+ document.getElementById("members").innerHTML="";
+ document.getElementById("collection").innerHTML="";
+ document.getElementById("expense").innerHTML="";
+ document.getElementById("summary").innerHTML="";
+ const photosBox = document.getElementById("photos");
+ const grid = photosBox.querySelector(".photo-grid");
+ grid.innerHTML="";
+ photosBox.style.display="none";
+
+ document.querySelectorAll(".jubilee").forEach(j=>j.classList.remove("show"));
+ document.querySelectorAll(".confetti").forEach(c=>c.remove());
+
+ if(!year) return;
+
+ if(chiefGuest[year]){
+  guestContainer.style.display="block";
+  guestImage.src = chiefGuest[year].img;
+  guestCaption.textContent = "मुख्य अतिथि: " + chiefGuest[year].name;
+ } else {
+  guestContainer.style.display="none";
+ }
+
+ if(year==="2024"){
+  document.getElementById("members").innerHTML=`<h2>ℹ️ सूचना</h2><p style="text-align:center;font-weight:bold">वर्ष 2024 की जानकारी<br>जल्द उपलब्ध होगी</p>`;
+  return;
+ }
+
+ if(year==="2025"){
+  document.querySelectorAll(".jubilee").forEach(j=>j.classList.add("show"));
+
+  // Fireworks
+  const fw = document.createElement("div"); fw.className="fireworks"; document.body.appendChild(fw);
+  const colors = ["#ff1744","#ffea00","#00e676","#2979ff","#ff9100"];
+  const interval = setInterval(()=>{
+    const cx=Math.random()*window.innerWidth;
+    const cy=Math.random()*window.innerHeight*0.6;
+    for(let i=0;i<30;i++){
+      const s=document.createElement("span");
+      s.className="spark";
+      s.style.left=cx+"px"; s.style.top=cy+"px";
+      s.style.background=colors[Math.floor(Math.random()*colors.length)];
+      const angle=Math.random()*Math.PI*2, dist=Math.random()*120+40;
+      s.style.setProperty("--x",Math.cos(angle)*dist+"px");
+      s.style.setProperty("--y",Math.sin(angle)*dist+"px");
+      fw.appendChild(s);
+    }
+  },600);
+  setTimeout(()=>{ clearInterval(interval); fw.style.opacity="0"; },5000);
+  setTimeout(()=>{ fw.remove(); },6000);
+
+  // Confetti
+  const conf = document.createElement("div"); conf.className="confetti";
+  for(let i=0;i<90;i++){
+    const s=document.createElement("span");
+    s.style.left=Math.random()*100+"%";
+    s.style.background=["gold","#ff5252","#4caf50","#42a5f5"][Math.floor(Math.random()*4)];
+    s.style.animationDelay=Math.random()*2+"s";
+    conf.appendChild(s);
+  }
+  document.body.appendChild(conf);
+  setTimeout(()=>{ conf.style.opacity="0"; },5000);
+  setTimeout(()=>{ conf.remove(); },6000);
+ }
+
+ const d=data[year];
+
+ document.getElementById("members").innerHTML=`<h2>👥 चयनित समिति सदस्य (${year})</h2>${d.members.map(m=>`<p>${m}</p>`).join("")}`;
+
+ //let g=0, rows="";
+ //for(let k in d.collection){ g+=d.collection[k]; rows+=`<div class="row"><span>${k}</span><span>₹${d.collection[k]}</span></div>`;}
+ let rows = "";
+let g = d.rural_total || 0;
+
+if(d.collection && Object.keys(d.collection).length > 0){
+  for(let k in d.collection){
+    rows += `<div class="row">
+              <span>${k}</span>
+              <span>₹${d.collection[k]}</span>
+            </div>`;
+  }
+} else {
+  rows = `<p style="text-align:center;color:#888">
+            (टोला-वार विवरण शीघ्र अपडेट किया जाएगा)
+          </p>`;
+}
+
+ document.getElementById("collection").innerHTML=`<h2>💰 चंदा विवरण</h2>${rows}<div class="row bold"><span>ग्रामीण कुल</span><span>₹${g}</span></div><div class="row bold"><span>कमिटी</span><span>₹${d.kamiti}</span></div><div class="row bold"><span>लकी ड्रॉ</span><span>₹${d.lucky_draw}</span></div><div class="row bold"><span>कलश</span><span>₹${d.kalash}</span></div><div class="row bold"><span>महाप्रसाद</span><span>₹${d.mahaprashad}</span></div>`;
+
+ let e=0, exp="";
+ for(let k in d.expense){ e+=d.expense[k]; exp+=`<div class="row"><span>${k}</span><span>₹${d.expense[k]}</span></div>`;}
+ document.getElementById("expense").innerHTML=`<h2>🧾 खर्च</h2>${exp}<div class="row bold"><span>कुल खर्च</span><span>₹${e}</span></div>`;
+
+ const total=g+d.kamiti+d.lucky_draw+d.kalash+d.mahaprashad;
+ document.getElementById("summary").innerHTML=`<div class="summary"><div class="box green">कुल संग्रह<br>₹${total}</div><div class="box red">कुल व्यय<br>₹${e}</div><div class="box blue">बचत<br>₹${total-e}</div></div>`;
+
+ if(yearPhotos[year]){
+  yearPhotos[year].forEach(src=>{
+   const img=document.createElement("img");
+   img.src=src;
+   img.onclick=()=>openLightbox(src);
+   grid.appendChild(img);
+  });
+  photosBox.style.display="block";
+
+  let pos=0;
+  window.photoScroll=setInterval(()=>{
+   pos+=1;
+   grid.scrollLeft=pos;
+   if(pos>=grid.scrollWidth-grid.clientWidth) pos=0;
+  },35);
+ }
+}
+
+function openLightbox(src){
+ const box=document.createElement("div");
+ box.className="lightbox";
+ box.innerHTML=`<span onclick="this.parentElement.remove()">✖</span><img src="${src}">`;
+ document.body.appendChild(box);
+}
+</script>
+<footer style="
+  text-align:center;
+  padding:12px;
+  font-size:12px;
+  color:#666;
+">
+  यह वेबसाइट समिति की सूचना एवं पारदर्शिता हेतु बनाई गई है।<br>
+  तकनीकी सहयोग: <span style="font-weight:500;">Subhash Kumar Sah</span>
+  <p>निवेदक: <b>बाल सरस्वती पूजा समिति</b></p>
+</footer>
+
+
+</body>
+</html>
