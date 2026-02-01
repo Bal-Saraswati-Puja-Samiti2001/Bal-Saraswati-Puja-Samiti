@@ -430,6 +430,42 @@ select{
 
   .notice-text{
     margin-top: 10px;
+    /* ===== NOTICE MOBILE FRIENDLY FIX ===== */
+@media (max-width: 768px){
+
+  .notice-wrapper{
+    position: relative;   /* ✅ flow me aa jayega */
+    top: auto;
+    left: auto;
+    margin: 15px 0;
+  }
+
+  .notice-title{
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .notice-card{
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .notice-card img{
+    height: auto;
+    max-height: 420px;
+  }
+
+  .notice-text{
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+
   }
 }
 
@@ -839,3 +875,4 @@ function openNotice(){
 
 </body>
 </html>
+
