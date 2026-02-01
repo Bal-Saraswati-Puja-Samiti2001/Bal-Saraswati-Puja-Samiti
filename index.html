@@ -36,6 +36,23 @@ body{
   color:#fff;
   text-align:center;
 }
+/* Marquee soft glow for non-jubilee year */
+.marquee.soft-glow{
+  animation: marqueeGlow 3s ease-in-out infinite;
+}
+
+@keyframes marqueeGlow{
+  0%{
+    filter: brightness(1);
+  }
+  50%{
+    filter: brightness(1.12);
+  }
+  100%{
+    filter: brightness(1);
+  }
+}
+
 .title h1{margin:0;font-size:22px;}
 .title p{margin:4px 0 0;font-size:14px;}
 
@@ -303,6 +320,119 @@ select{
     object-fit: cover;
   }
 }
+/* NOTICE WRAPPER */
+.notice-wrapper{
+  position: fixed;
+  top: 180px;     /* header ke niche */
+  left: 20px;     /* 👈 LEFT SIDE FIX */
+  z-index: 999;
+}
+
+
+/* TITLE */
+.notice-title{
+  position: absolute;
+  top: -35px;
+  width: 280px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  background: linear-gradient(135deg,#ff512f,#04e810);
+  color: #fff;
+  padding: 6px 0;
+  border-radius: 8px;
+}
+
+.notice-card{
+  width: 280px;
+  height: 380px;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+/* IMAGE */
+.notice-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(1px) brightness(0.75);
+  transition: 0.4s;
+}
+
+.notice-card:hover img{
+  filter: blur(0) brightness(0.9);
+  transform: scale(1.05);
+}
+
+/* OVERLAY TEXT */
+.notice-overlay{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  font-weight: bold;
+  pointer-events: none;
+}
+
+/* TEXT BELOW */
+.notice-text{
+  position: absolute;
+  top: 390px;
+  width: 280px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* LIGHTBOX */
+.notice-lightbox{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.notice-lightbox img{
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  cursor: grab;
+  transition: transform 0.25s ease;
+}
+
+.notice-lightbox span{
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 26px;
+  color: white;
+  cursor: pointer;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px){
+  .notice-card,
+  .notice-text,
+  .notice-title{
+    position: static;
+    width: 100%;
+  }
+
+  .notice-text{
+    margin-top: 10px;
+  }
+}
+
 
 
 
@@ -338,7 +468,6 @@ select{
   <div class="card">
     <select id="yearSelect" onchange="loadYear()">
       <option value="">📅 वर्ष चुनें</option>
-      <option value="2024">2024</option>
       <option value="2025">2025</option>
       <option value="2026">2026</option>
     </select>
@@ -349,6 +478,30 @@ select{
     <img id="guestImage" src="" alt="मुख्य अतिथि">
     <p id="guestCaption"></p>
   </div>
+  <!-- NOTICE SECTION -->
+<div class="notice-wrapper">
+
+  <div class="notice-title">📢 सूचना</div>
+
+  <div class="notice-card" onclick="openNotice()">
+    <img src="images/vidyarthi_samman_samaroh.jpg" alt="Official Notice">
+
+    <div class="notice-overlay">
+      📜 आधिकारिक सूचना<br>देखने के लिए क्लिक करें
+    </div>
+  </div>
+
+  <p class="notice-text">
+    बाल सरस्वती पूजा समिति द्वारा आयोजित
+    <strong>विद्यार्थी सम्मान समारोह</strong>
+    से संबंधित आधिकारिक सूचना।
+    <br>
+    (चित्र पर क्लिक कर पूर्ण सूचना देखें)
+  </p>
+
+</div>
+
+  
 
   <div id="members" class="card"></div>
   <div id="collection" class="card"></div>
@@ -364,8 +517,7 @@ select{
 const data = {
  "2025": {
   members:["अध्यक्ष: दिनेश साह","कोषाध्यक्ष: रौशन कुमार साह","सचिव: रंधीर कुमार साह"],
-  ///collection:{"साह टोला":25000,"ब्राह्मण टोला":25000,"सहनी टोला":25000,"यादव टोला":441},
-  ///kamiti:107683,lucky_draw:6400,kalash:11800,mahaprashad:4453,
+  
 
   rural_total: 75441,   // ✅ सही verified कुल
 
@@ -380,20 +532,36 @@ const data = {
  },
  "2026": {
   members:["अध्यक्ष: दिलीप साहू", "कोषाध्यक्ष: सुरेन्द्र कुमार साह", "सचिव: रंधीर कुमार साह"],
- }
-};
+   rural_total: 67546,   // ✅ सही verified कुल
+
+  collection: {},       // 🚫 tola-wise अभी blank
+
+  kamiti:84783,
+  lucky_draw:3200,
+  kalash:8100,
+  mahaprashad: 0,
+  mahaprashad_note: "सभी व्यक्तिगत सहयोग से",
+
+
+  expense:{"मूर्ति (दाता)": 11000,"टेंट": 42500,"सजावट": 11000,"सेट्रींग":6000,"पाग + डोपता + रिबन + माला":950,"लकी ड्रॉ सामग्री": 3440 ,"विद्यार्थी सम्मान समारोह": 2880,"अबीर + चूना":1130 ,"गेंदा फूल":500 ,"डीजल + पेट्रोल":1020,"मिट्टी कलश + दीप":2000,"संकल्प हेतु":1002 ,"दक्षिणा":5101 ,"खाना + नाश्ता(टेंट + थाना स्टाफ)":908,"फल":550 ,"सांस्कृतिक ढोल":1500,"बैनर + कार्ड":1690,"जंगली बादशाह":22500,"महाकाल रोड झांकी":15720 ,"सांस्कृतिक कार्यक्रम":12000 ,"फटाका + स्प्रे":2000,"भाड़ा(भासान हेतु)":1000,"किराना":6748 ,"लाल कपड़ा + गमछा ":1950 ,"नारियल + पूजा सामग्री":4391,"अन्य खर्च":4137} }
+ };
 
 const yearPhotos = {
  "2025":["2025/img1.jpg","2025/img2.jpg","2025/img3.jpg","2025/img4.jpg","2025/img5.jpg","2025/img6.jpeg","2025/img7.jpeg","2025/img8.jpeg"],
- "2024":["2024/img1.jpg","2024/img2.jpg"]
+ "2026":["2026/img1.jpeg","2026/img2.jpeg","2026/img3.jpg","2026/img4.jpg","2026/img5.jpg","2026/img6.jpg","2026/img7.jpg","2026/img8.jpg","2026/img9.jpg","2026/img10.jpg","2026/img11.jpg","2026/img12.jpg","2026/img13.jpg"],
 };
 
 const chiefGuest = {
- //"2024": {name:"डा. रामेश्वर साह", img:"2024/guest.jpg"},
- "2025": {name:"तत्कालीन थानाध्यक्ष(सकरी थाना) ", img:"2025/guest.jpg"}
+ "2025": {name:"तत्कालीन थानाध्यक्ष(सकरी थाना) ", img:"guest/2025.jpg"},
+ "2026": {
+  name: "BDO (रहिका प्रखण्ड)",
+  img: "guest/2026.jpeg"
+}
+
 };
 
 function loadYear(){
+  
   
  const year = yearSelect.value;
  
@@ -424,12 +592,6 @@ function loadYear(){
  } else {
   guestContainer.style.display="none";
  }
-
- if(year==="2024"){
-  document.getElementById("members").innerHTML=`<h2>ℹ️ सूचना</h2><p style="text-align:center;font-weight:bold">वर्ष 2024 की जानकारी<br>जल्द उपलब्ध होगी</p>`;
-  return;
- }
-
  if(year==="2025"){
   document.querySelectorAll(".jubilee").forEach(j=>j.classList.add("show"));
 
@@ -483,13 +645,17 @@ if(d.collection && Object.keys(d.collection).length > 0){
               <span>₹${d.collection[k]}</span>
             </div>`;
   }
-} else {
-  rows = `<p style="text-align:center;color:#888">
-            (टोला-वार विवरण शीघ्र अपडेट किया जाएगा)
-          </p>`;
 }
+// else कुछ भी नहीं दिखेगा
 
- document.getElementById("collection").innerHTML=`<h2>💰 चंदा विवरण</h2>${rows}<div class="row bold"><span>ग्रामीण कुल</span><span>₹${g}</span></div><div class="row bold"><span>कमिटी</span><span>₹${d.kamiti}</span></div><div class="row bold"><span>लकी ड्रॉ</span><span>₹${d.lucky_draw}</span></div><div class="row bold"><span>कलश</span><span>₹${d.kalash}</span></div><div class="row bold"><span>महाप्रसाद</span><span>₹${d.mahaprashad}</span></div>`;
+ document.getElementById("collection").innerHTML=`<h2>💰 चंदा विवरण</h2>${rows}<div class="row bold"><span>ग्रामीण कुल</span><span>₹${g}</span></div><div class="row bold"><span>कमिटी</span><span>₹${d.kamiti}</span></div><div class="row bold"><span>लकी ड्रॉ</span><span>₹${d.lucky_draw}</span></div><div class="row bold"><span>कलश</span><span>₹${d.kalash}</span></div>
+<div class="row bold">
+  <span>महाप्रसाद</span>
+  <span>
+    ${d.mahaprashad_note ? d.mahaprashad_note : "₹"+d.mahaprashad}
+  </span>
+</div>
+`;
 
  let e=0, exp="";
  for(let k in d.expense){ e+=d.expense[k]; exp+=`<div class="row"><span>${k}</span><span>₹${d.expense[k]}</span></div>`;}
@@ -522,7 +688,143 @@ function openLightbox(src){
  box.innerHTML=`<span onclick="this.parentElement.remove()">✖</span><img src="${src}">`;
  document.body.appendChild(box);
 }
+function openNotice(){
+  const box = document.createElement("div");
+  box.className = "notice-lightbox";
+
+  const img = document.createElement("img");
+  img.src = "images/vidyarthi_samman_samaroh.jpg";
+
+  let scale = 1;
+  let posX = 0, posY = 0;
+  let startX = 0, startY = 0;
+  let isDragging = false;
+
+  const minScale = 1;
+  const maxScale = 3;
+
+  function updateTransform(){
+    img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+  }
+
+  /* 🖱️ DESKTOP DRAG */
+  img.addEventListener("mousedown", (e)=>{
+    if(scale === 1) return;
+    isDragging = true;
+    startX = e.clientX - posX;
+    startY = e.clientY - posY;
+    img.style.cursor = "grabbing";
+  });
+
+  window.addEventListener("mousemove", (e)=>{
+    if(!isDragging) return;
+    posX = e.clientX - startX;
+    posY = e.clientY - startY;
+    updateTransform();
+  });
+
+  window.addEventListener("mouseup", ()=>{
+    isDragging = false;
+    img.style.cursor = "grab";
+  });
+
+  /* 🖱️ MOUSE WHEEL ZOOM */
+  img.addEventListener("wheel", (e)=>{
+    e.preventDefault();
+    scale += e.deltaY < 0 ? 0.15 : -0.15;
+    scale = Math.min(Math.max(scale, minScale), maxScale);
+    updateTransform();
+  }, { passive:false });
+
+  /* 👆 CLICK TO TOGGLE ZOOM */
+  img.onclick = (e)=>{
+    e.stopPropagation();
+    scale = scale === 1 ? 2 : 1;
+    posX = posY = 0;
+    updateTransform();
+  };
+
+  /* 📱 MOBILE DRAG + PINCH */
+  let startDist = 0;
+
+  img.addEventListener("touchstart", (e)=>{
+    if(e.touches.length === 1){
+      isDragging = true;
+      startX = e.touches[0].clientX - posX;
+      startY = e.touches[0].clientY - posY;
+    }
+    if(e.touches.length === 2){
+      startDist = Math.hypot(
+        e.touches[0].pageX - e.touches[1].pageX,
+        e.touches[0].pageY - e.touches[1].pageY
+      );
+    }
+  }, { passive:false });
+
+  img.addEventListener("touchmove", (e)=>{
+    e.preventDefault();
+
+    if(e.touches.length === 1 && isDragging && scale > 1){
+      posX = e.touches[0].clientX - startX;
+      posY = e.touches[0].clientY - startY;
+    }
+
+    if(e.touches.length === 2){
+      const newDist = Math.hypot(
+        e.touches[0].pageX - e.touches[1].pageX,
+        e.touches[0].pageY - e.touches[1].pageY
+      );
+      scale += (newDist - startDist) / 200;
+      scale = Math.min(Math.max(scale, minScale), maxScale);
+      startDist = newDist;
+    }
+
+    updateTransform();
+  }, { passive:false });
+
+  img.addEventListener("touchend", ()=>{
+    isDragging = false;
+  });
+
+  /* ❌ CLOSE */
+  box.onclick = ()=> box.remove();
+
+  const close = document.createElement("span");
+  close.innerHTML = "✖";
+  close.onclick = (e)=>{
+    e.stopPropagation();
+    box.remove();
+  };
+
+  box.appendChild(close);
+  box.appendChild(img);
+  document.body.appendChild(box);
+
+  img.style.cursor = "grab";
+}
+
 </script>
+<div style="text-align:center; margin-top:15px;">
+  <a href="mailto:balsaraswatipujasamiti2001@gmail.com"
+     style="
+       display:inline-flex;
+       align-items:center;
+       gap:8px;
+       padding:10px 16px;
+       background:blue;
+       color:whitesmoke;
+       border-radius:8px;
+       text-decoration:none;
+       font-weight:600;
+     ">
+    <img 
+      src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
+      style="width:22px;height:22px;"
+    >
+     संपर्क करें
+
+  </a>
+</div>
 <footer style="
   text-align:center;
   padding:12px;
