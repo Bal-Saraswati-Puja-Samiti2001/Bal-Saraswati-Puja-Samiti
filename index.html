@@ -164,7 +164,7 @@ select{
   scroll-behavior:auto;
 }
 .photo-grid::-webkit-scrollbar{
-  display:-webkit-inline-box;
+  display:-none;
 }
 .photo-grid img{
   min-width:140px;
@@ -761,12 +761,22 @@ if(d.collection && Object.keys(d.collection).length > 0){
   });
   photosBox.style.display="block";
 
-  let pos=0;
-  window.photoScroll=setInterval(()=>{
-   pos+=1;
-   grid.scrollLeft=pos;
-   if(pos>=grid.scrollWidth-grid.clientWidth) pos=0;
-  },35);
+ let pos = 0;
+
+if(window.photoScroll){
+  clearInterval(window.photoScroll);
+}
+
+window.photoScroll = setInterval(() => {
+  pos += 0.5;   // slow smooth scroll
+  grid.scrollLeft = pos;
+
+  if (pos >= grid.scrollWidth - grid.clientWidth) {
+    pos = 0;
+    grid.scrollTo({ left: 0, behavior: "auto" });
+  }
+
+}, 20);
  }
 }
 
@@ -927,6 +937,7 @@ function openNotice(){
 
 </body>
 </html>
+
 
 
 
