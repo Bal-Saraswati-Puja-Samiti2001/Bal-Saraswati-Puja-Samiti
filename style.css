@@ -670,3 +670,16 @@ text-align:center;
     background: rgba(255,255,255,0.1); /* subtle highlight */
   }
 }
+/* Mobile: stacked & relative so footer visible */
+@media (max-width: 600px) {
+  .contact-section {
+    position: relative;   /* flow me aa jayega */
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+    margin-bottom: 15px;  /* footer ke upar thoda gap */
+  }
+}
