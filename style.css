@@ -633,4 +633,40 @@ text-align:center;
 
 }
 
+
+}
+.contact-links{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center; /* desktop vertical alignment */
+}
+
+.contact-message{
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 8px;
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* ================= MOBILE FIX ================= */
+@media (max-width: 600px){
+  .contact-links{
+    flex-direction: column; /* stack message and links */
+    align-items: flex-start; /* left-align for mobile */
+    gap: 6px; /* thoda gap between message and links */
+  }
+
+  .contact-message{
+    margin-right: 0; /* remove desktop spacing */
+  }
+
+  .contact-links a{
+    width: 100%;          /* full width links for easier tap */
+    text-align: left;
+    padding: 8px 10px;    /* touch friendly */
+    border-radius: 6px;
+    background: rgba(255,255,255,0.1); /* subtle highlight */
+  }
 }
