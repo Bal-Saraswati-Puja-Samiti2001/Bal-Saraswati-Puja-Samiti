@@ -563,27 +563,38 @@ select{
 
 
 
-.contact-section{
+/* Desktop: fixed at bottom */
+.contact-section {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(135deg,#6a11cb,#2575fc);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5px;
+  color: white;
+  font-size: 14px;
+  z-index: 999;
+}
 
-position:fixed;
-bottom:0;
-left:0;
+/* Mobile: relative, stacked, aur footer ke liye jagah */
+@media (max-width: 768px) {
+  .contact-section {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+    margin-bottom: 20px; /* footer ke upar space */
+  }
 
-width:100%;
-
-background:linear-gradient(135deg,#6a11cb,#2575fc);
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:10px 5px;
-
-color:white;
-font-size:14px;
-
-z-index:999;
-
+  footer {
+    padding-bottom: 20px; /* extra space footer ke liye */
+  }
 }
 
 .contact-links{
@@ -683,3 +694,4 @@ text-align:center;
     margin-bottom: 15px;  /* footer ke upar thoda gap */
   }
 }
+
