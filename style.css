@@ -810,5 +810,54 @@ text-align:center;
     scroll-behavior: auto !important;
   }
 }
+/* Premium colour theme only */
+:root {
+  --puja-cream: #fffaf0;
+  --puja-paper: #fffdf8;
+  --puja-maroon: #70243a;
+  --puja-maroon-dark: #491526;
+  --puja-gold: #c89b3c;
+  --puja-gold-soft: #f1dfb0;
+}
 
+body {
+  background-color: #fffaf0;
+  color: #34242a;
+}
+
+.header-wrap {
+  background-color: #70243a;
+  border-bottom: 3px solid #c89b3c;
+}
+
+.title h1 {
+  color: #fff8e8;
+}
+
+.title p {
+  color: #f1dfb0;
+}
+
+.card {
+  background-color: #fffdf8;
+  border-color: rgba(112, 36, 58, 0.13);
+}
+
+h1, h2, h3, h4 {
+  color: #491526;
+}
+
+#members th,
+#collection th,
+#expense th,
+#summary th {
+  background-color: #70243a;
+  color: #fff8e8;
+}
+
+.contact-section {
+  background-color: #491526;
+  color: #fff8e8;
+  border-top: 3px solid #c89b3c;
+}
 
