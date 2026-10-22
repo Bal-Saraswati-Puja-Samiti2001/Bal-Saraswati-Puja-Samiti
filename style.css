@@ -694,4 +694,121 @@ text-align:center;
     margin-bottom: 15px;  /* footer ke upar thoda gap */
   }
 }
+  border-top: 3px solid var(--puja-gold);
+}
+
+.contact-text {
+  color: #fff8e8;
+  margin-bottom: 12px;
+}
+
+.contact-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contact-links span {
+  flex-basis: 100%;
+  color: #f1dfb0;
+  margin-bottom: 4px;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 82px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  color: #fff8e8;
+  text-decoration: none;
+  border: 1px solid rgba(241, 223, 176, .35);
+  background: rgba(255, 255, 255, .08);
+}
+
+.contact-links a:hover {
+  color: var(--puja-maroon-dark);
+  background: #f1dfb0;
+  transform: translateY(-2px);
+}
+
+::selection {
+  color: var(--puja-maroon-dark);
+  background: var(--puja-gold-soft);
+}
+
+@media (max-width: 700px) {
+  .header-wrap {
+    padding: 16px 0;
+  }
+
+  .marquee-item {
+    gap: 10px;
+    padding: 8px 14px;
+  }
+
+  .title h1 {
+    font-size: clamp(1rem, 4vw, 1.4rem);
+  }
+
+  .title p {
+    font-size: .88rem;
+  }
+
+  .saraswati-img {
+    max-width: 54px;
+    height: auto;
+  }
+
+  .jubilee {
+    font-size: .78rem;
+    padding: 7px 10px;
+  }
+
+  .container {
+    width: min(100% - 20px, 1080px);
+    margin: 18px auto 28px;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 16px;
+    margin: 14px 0;
+  }
+
+  .notice-wrapper {
+    padding: 15px;
+    border-radius: 16px;
+  }
+
+  #members table, #collection table, #expense table, #summary table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #members td, #collection td, #expense td, #summary td,
+  #members th, #collection th, #expense th, #summary th {
+    padding: 10px 12px;
+  }
+
+  .photo-grid {
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 
