@@ -288,20 +288,20 @@ select{
     padding:10px;
   }
 
-  .marquee-item {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0;
-    padding: 0 12px;
-    box-sizing: border-box;
-  }
-   .marquee-item .title {
-    flex: 1;
-    min-width: 0;
-    text-align: center;
-  }
-
+ .marquee-item {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  color: #fff;
+  text-align: center;
+  padding: 0;
+}
+ .marquee-item .title {
+  flex: 1;
+  text-align: center;
+}
   .title h1 {
     font-size: 16px;
   }
@@ -310,13 +310,13 @@ select{
     font-size: 12px;
   }
 
-  .saraswati-img {
-    width: 32px;
-    height: auto;
-    margin: 0;
-    flex-shrink: 0;
-  }
-
+ .marquee-item .saraswati-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin: 0;
+  flex-shrink: 0;
+}
   .title{
   text-align:center;
 }
